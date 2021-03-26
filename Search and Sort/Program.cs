@@ -11,13 +11,13 @@ namespace Search_and_Sort
             string roadOneFileData = Console.ReadLine();
             string[] roadOneString = System.IO.File.ReadAllLines(roadOneFileData);
             int[] roadOne = Array.ConvertAll(roadOneString, int.Parse);
-            Array.Sort(roadOne);
+            AscendingSort(roadOne);
            
             Console.Write("Please input the file path for Road_2_256.txt: ");
             string roadTwoFileData = Console.ReadLine();
             string[] roadTwoString = System.IO.File.ReadAllLines(roadTwoFileData);
             int[] roadTwo = Array.ConvertAll(roadTwoString, int.Parse);
-            Array.Sort(roadTwo);
+            AscendingSort(roadTwo);
 
             Console.Write("Please input the file path for Road_3_256.txt: ");
             string roadThreeFileData = Console.ReadLine();
@@ -26,6 +26,11 @@ namespace Search_and_Sort
             Array.Sort(roadThree);
         }
 
+        public static void AscendingSort(int[] arr)
+        {
+            Array.Sort(arr);
+            Console.WriteLine(string.Join(", ", arr));
+        }
         
     }
 }
