@@ -1,39 +1,48 @@
 ﻿using System;
+using System.IO;
 
 namespace Search_and_Sort
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
+            // Welcome the user to the program
+            Console.WriteLine("Hello user, welcome to the Search and Sort Program. This program is designed to sort and search for values in given data files.");
             // Ask the user for the file paths to each of the respective data sets and sort them into individual arrays
             Console.Write("Please input the file path for Road_1_256.txt: ");
             string roadOneFileData = Console.ReadLine();
+            FileValidation(roadOneFileData);
             string[] roadOneString = System.IO.File.ReadAllLines(roadOneFileData);
             int[] roadOne = Array.ConvertAll(roadOneString, int.Parse);
                                                            
             Console.Write("Please input the file path for Road_2_256.txt: ");
             string roadTwoFileData = Console.ReadLine();
+            FileValidation(roadTwoFileData);
             string[] roadTwoString = System.IO.File.ReadAllLines(roadTwoFileData);
             int[] roadTwo = Array.ConvertAll(roadTwoString, int.Parse);
             
             Console.Write("Please input the file path for Road_3_256.txt: ");
             string roadThreeFileData = Console.ReadLine();
+            FileValidation(roadThreeFileData);
             string[] roadThreeString = System.IO.File.ReadAllLines(roadThreeFileData);
             int[] roadThree = Array.ConvertAll(roadThreeString, int.Parse);
 
             Console.Write("Please input the file path for Road_1_2048.txt: ");
             string roadOne2048FileData = Console.ReadLine();
+            FileValidation(roadOne2048FileData);
             string[] roadOne2048String = System.IO.File.ReadAllLines(roadOne2048FileData);
             int[] roadOne2048 = Array.ConvertAll(roadOne2048String, int.Parse);
 
             Console.Write("Please input the file path for Road_2_2048.txt: ");
             string roadTwo2048FileData = Console.ReadLine();
+            FileValidation(roadTwo2048FileData);
             string[] roadTwo2048String = System.IO.File.ReadAllLines(roadTwo2048FileData);
             int[] roadTwo2048 = Array.ConvertAll(roadTwo2048String, int.Parse);
 
             Console.Write("Please input the file path for Road_3_2048.txt: ");
             string roadThree2048FileData = Console.ReadLine();
+            FileValidation(roadThree2048FileData);
             string[] roadThree2048String = System.IO.File.ReadAllLines(roadThree2048FileData);
             int[] roadThree2048 = Array.ConvertAll(roadThree2048String, int.Parse);
 
@@ -83,7 +92,7 @@ namespace Search_and_Sort
             Console.WriteLine(string.Join(", ", arr));
         }
 
-        public static void DisplayIterativeValues(int[] arr)
+        private static void DisplayIterativeValues(int[] arr)
         {
             int dataLength = arr.Length;
 
@@ -307,7 +316,7 @@ namespace Search_and_Sort
             }            
         }
 
-        public static int GetClosestValue(int valueOne, int valueTwo, int searchTarget)
+        private static int GetClosestValue(int valueOne, int valueTwo, int searchTarget)
         {
             // Determine between two values which is closest to the given number
             if (searchTarget - valueOne >= valueTwo - searchTarget)
@@ -316,7 +325,7 @@ namespace Search_and_Sort
                 return valueOne;
         }
 
-        public static void DataMenu(int[] roadOne, int[] roadTwo, int[] roadThree, int[] roadOne2048, int[] roadTwo2048, int[] roadThree2048)
+        private static void DataMenu(int[] roadOne, int[] roadTwo, int[] roadThree, int[] roadOne2048, int[] roadTwo2048, int[] roadThree2048)
         {
             Console.WriteLine();
             Console.WriteLine("Which data set would you like to use:\n1) Road One\n2) Road Two\n3) Road Three\n4) Road One - 2048\n5) Road Two - 2048\n6) Road Three - 2048\nResponse: ");
@@ -353,7 +362,7 @@ namespace Search_and_Sort
 
         }
 
-        public static void ProcessMenu(int[] arr)
+        private static void ProcessMenu(int[] arr)
         {
             Console.WriteLine();
             Console.WriteLine("Which process would you like to use:\n1) Ascending Sort\n2) Descending Sort\n3) Display Iterative Values\n4) Value Search\nResponse: ");
@@ -361,24 +370,68 @@ namespace Search_and_Sort
             if (processResponse == "Ascending Sort")
             {
                 AscendingSort(arr);
+                RestartSystem();
             }
             else if (processResponse == "Descending Sort")
             {
                 DescendingSort(arr);
+                RestartSystem();
             }
             else if (processResponse == "Display Iterative Values")
             {
                 DisplayIterativeValues(arr);
+                RestartSystem();
             }
             else if (processResponse == "Value Search")
             {
                 int closestValue = UserSearch(arr);
                 int valuePosition = Array.IndexOf(arr, closestValue) + 1;
                 Console.WriteLine($"The closest value to your search is {closestValue}, found at position {valuePosition}");
+                RestartSystem();
             }
             else
             {
                 ProcessMenu(arr);
+            }
+        }
+
+        private static void FileValidation(string data)
+        {
+            if (File.Exists(data))
+            {
+                Console.WriteLine("Valid file");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("This file path was invalid. Resetting system.");
+                Main();
+            }
+        }
+
+        private static void RestartSystem()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Do you wish to use the system again (Yes/No)");
+            string restartResponse = Console.ReadLine();
+            if (restartResponse == "Yes")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Restarting system.");
+                Console.WriteLine();
+                Main();
+            }
+            else if (restartResponse == "No")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Thank you for using the Search and Sort Program.");
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Invalid input. Try again.");
+                Console.WriteLine();
+                RestartSystem();
             }
         }
     }
