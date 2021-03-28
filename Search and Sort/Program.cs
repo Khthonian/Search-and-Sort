@@ -52,44 +52,94 @@ namespace Search_and_Sort
 
         private static void AscendingSort(int[] arr)
         {
-            // Sort the array in ascending order
-            int z;
-            for (int p = 0; p <= arr.Length - 2; p++)
+            if (arr.Length == 256)
             {
-                for (int i = 0; i <= arr.Length - 2; i++)
+                // Sort the array in ascending order
+                int z;
+                for (int p = 0; p <= arr.Length - 2; p++)
                 {
-                    if (arr[i] > arr[i + 1])
+                    for (int i = 0; i <= arr.Length - 2; i++)
                     {
-                        z = arr[i + 1];
-                        arr[i + 1] = arr[i];
-                        arr[i] = z;
+                        if (arr[i] > arr[i + 1])
+                        {
+                            z = arr[i + 1];
+                            arr[i + 1] = arr[i];
+                            arr[i] = z;
+                        }
                     }
                 }
+                Console.WriteLine();
+                Console.WriteLine("The values you have requested are:");
+                Console.WriteLine(string.Join(", ", arr));
             }
-            Console.WriteLine();
-            Console.WriteLine("The values you have requested are:");
-            Console.WriteLine(string.Join(", ", arr));
+
+            else if (arr.Length == 2048)
+            {
+                int z;
+                for (int p = 0; p <= arr.Length - 2; p++)
+                {
+                    for (int i = 0; i <= arr.Length - 2; i++)
+                    {
+                        if (arr[i] > arr[i + 1])
+                        {
+                            z = arr[i + 1];
+                            arr[i + 1] = arr[i];
+                            arr[i] = z;
+                        }
+                    }
+                }
+                for (int i = 50; i < arr.Length; i = i + 50)
+                {
+                    Console.WriteLine(arr[i]);
+                }
+            }
         }
 
         private static void DescendingSort(int[] arr)
         {
-            // Sort the array in descending order
-            int z;
-            for (int p = 0; p <= arr.Length - 2; p++)
+            if (arr.Length == 256)
             {
-                for (int i = 0; i <= arr.Length - 2; i++)
+
+
+                // Sort the array in descending order
+                int z;
+                for (int p = 0; p <= arr.Length - 2; p++)
                 {
-                    if (arr[i] < arr[i + 1])
+                    for (int i = 0; i <= arr.Length - 2; i++)
                     {
-                        z = arr[i + 1];
-                        arr[i + 1] = arr[i];
-                        arr[i] = z;
+                        if (arr[i] < arr[i + 1])
+                        {
+                            z = arr[i + 1];
+                            arr[i + 1] = arr[i];
+                            arr[i] = z;
+                        }
                     }
                 }
+                Console.WriteLine();
+                Console.WriteLine("The values you have requested are:");
+                Console.WriteLine(string.Join(", ", arr));
             }
-            Console.WriteLine();
-            Console.WriteLine("The values you have requested are:");
-            Console.WriteLine(string.Join(", ", arr));
+
+            else if (arr.Length == 2048)
+            {
+                int z;
+                for (int p = 0; p <= arr.Length - 2; p++)
+                {
+                    for (int i = 0; i <= arr.Length - 2; i++)
+                    {
+                        if (arr[i] < arr[i + 1])
+                        {
+                            z = arr[i + 1];
+                            arr[i + 1] = arr[i];
+                            arr[i] = z;
+                        }
+                    }
+                }
+                for (int i = 50; i < arr.Length; i = i + 50)
+                {
+                    Console.WriteLine(arr[i]);
+                }
+            }
         }
 
         private static void DisplayIterativeValues(int[] arr)
@@ -328,7 +378,7 @@ namespace Search_and_Sort
         private static void DataMenu(int[] roadOne, int[] roadTwo, int[] roadThree, int[] roadOne2048, int[] roadTwo2048, int[] roadThree2048)
         {
             Console.WriteLine();
-            Console.WriteLine("Which data set would you like to use:\n1) Road One\n2) Road Two\n3) Road Three\n4) Road One - 2048\n5) Road Two - 2048\n6) Road Three - 2048\nResponse: ");
+            Console.WriteLine("Which data set would you like to use:\n1) Road One\n2) Road Two\n3) Road Three\n4) Road One - 2048\n5) Road Two - 2048\n6) Road Three - 2048\n7) View Special Merges\nResponse: ");
             string dataResponse = Console.ReadLine();           
             if (dataResponse == "Road One")
             {
@@ -353,6 +403,10 @@ namespace Search_and_Sort
             else if (dataResponse == "Road Three - 2048")
             {
                 ProcessMenu(roadThree2048);
+            }
+            else if (dataResponse == "View Special Merges")
+            {
+                SpecialMerge(roadOne, roadThree, roadOne2048, roadThree2048);
             }
             else
             {
@@ -433,6 +487,42 @@ namespace Search_and_Sort
                 Console.WriteLine();
                 RestartSystem();
             }
+        }
+
+        private static void SpecialMerge(int[] roadOne256, int[] roadThree256, int[] roadOne2048, int[] roadThree2048)
+        {
+            // Copy the relevant arrays into a single array specifically for this task
+            int[] merge256 = new int[512];
+            Array.Copy(roadOne256, 0, merge256, 0, roadOne256.Length);
+            Array.Copy(roadThree256, 0, merge256, 256, roadThree256.Length);
+
+            int[] merge2048 = new int[4096];
+            Array.Copy(roadOne2048, 0, merge2048, 0, roadOne2048.Length);
+            Array.Copy(roadThree2048, 0, merge2048, 2048, roadThree2048.Length);
+
+            Console.WriteLine("We shall begin with the merges of Road_1_256.txt and Road_3_256.txt.");
+            Console.WriteLine();
+            Console.WriteLine("Here is the ascending sort:");
+            AscendingSort(merge256);
+            Console.WriteLine();
+            Console.WriteLine("Here is the descending sort:");
+            DescendingSort(merge256);
+            Console.WriteLine();
+            Console.WriteLine("Here is the display of the iterative values:");
+            DisplayIterativeValues(merge256);
+            Console.WriteLine();
+            Console.WriteLine("Now we shall use the merges of Road_1_2048.txt and Road_3_2048.txt.");
+            Console.WriteLine();
+            Console.WriteLine("Here is the ascending sort:");
+            AscendingSort(merge2048);
+            Console.WriteLine();
+            Console.WriteLine("Here is the descending sort:");
+            DescendingSort(merge2048);
+            Console.WriteLine();
+            Console.WriteLine("Here is the display of the iterative values:");
+            DisplayIterativeValues(merge2048);
+            Console.WriteLine();
+            RestartSystem();
         }
     }
 }
