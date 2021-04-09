@@ -492,7 +492,6 @@ namespace Search_and_Sort
         private static void SpecialMerge(int[] roadOne256, int[] roadThree256, int[] roadOne2048, int[] roadThree2048)
         {
             // Copy the relevant arrays into a single array specifically for this task
-            // This method is very hands off and non interactive for the user as there was no need
             int[] merge256 = new int[512];
             Array.Copy(roadOne256, 0, merge256, 0, roadOne256.Length);
             Array.Copy(roadThree256, 0, merge256, 256, roadThree256.Length);
