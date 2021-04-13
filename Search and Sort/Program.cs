@@ -8,46 +8,77 @@ namespace Search_and_Sort
         public static void Main()
         {
             // Welcome the user to the program
-            Console.WriteLine("Hello user, welcome to the Search and Sort Program. This program is designed to sort and search for values in given data files.");
+            Console.WriteLine("Hello user, welcome to the Search and Sort Program. This program is designed to sort and search for values in given data files.\n");
+
+            // Ask the user if they would like to manually input the data or use the data that came packaged with the application
+            Console.WriteLine("Would you like to use the pre-installed data or input your own files?");
+            Console.WriteLine("Input YES or NO");
+            switch (Console.ReadLine().ToLower())
+            {
+                case "yes":
+                    break;
+                case "no":
+                    ManualFileInput();
+                    break;
+                default:
+                    Main();
+                    break;
+            }
+
+            // Automatically call the preset files
+            int[] roadOne = FileLoader("Road_1_256.txt");
+            int[] roadTwo = FileLoader("Road_2_256.txt");
+            int[] roadThree = FileLoader("Road_3_256.txt");
+            int[] roadOne2048 = FileLoader("Road_1_2048.txt");
+            int[] roadTwo2048 = FileLoader("Road_2_2048.txt");
+            int[] roadThree2048 = FileLoader("Road_3_2048.txt");
+
+            // Ask the user which data set they would like to use
+            DataMenu(roadOne, roadTwo, roadThree, roadOne2048, roadTwo2048, roadThree2048);           
+        }
+
+        private static void ManualFileInput()
+        {
             // Ask the user for the file paths to each of the respective data sets and sort them into individual arrays
             Console.Write("Please input the file path for Road_1_256.txt: ");
             string roadOneFileData = Console.ReadLine();
             FileValidation(roadOneFileData);
-            string[] roadOneString = System.IO.File.ReadAllLines(roadOneFileData);
-            int[] roadOne = Array.ConvertAll(roadOneString, int.Parse);
-                                                           
+            int[] roadOne = FileLoader(roadOneFileData);            
+
             Console.Write("Please input the file path for Road_2_256.txt: ");
             string roadTwoFileData = Console.ReadLine();
             FileValidation(roadTwoFileData);
-            string[] roadTwoString = System.IO.File.ReadAllLines(roadTwoFileData);
-            int[] roadTwo = Array.ConvertAll(roadTwoString, int.Parse);
+            int[] roadTwo = FileLoader(roadTwoFileData);
             
             Console.Write("Please input the file path for Road_3_256.txt: ");
             string roadThreeFileData = Console.ReadLine();
             FileValidation(roadThreeFileData);
-            string[] roadThreeString = System.IO.File.ReadAllLines(roadThreeFileData);
-            int[] roadThree = Array.ConvertAll(roadThreeString, int.Parse);
-
+            int[] roadThree = FileLoader(roadThreeFileData);
+            
             Console.Write("Please input the file path for Road_1_2048.txt: ");
             string roadOne2048FileData = Console.ReadLine();
             FileValidation(roadOne2048FileData);
-            string[] roadOne2048String = System.IO.File.ReadAllLines(roadOne2048FileData);
-            int[] roadOne2048 = Array.ConvertAll(roadOne2048String, int.Parse);
-
+            int[] roadOne2048 = FileLoader(roadOne2048FileData);
+            
             Console.Write("Please input the file path for Road_2_2048.txt: ");
             string roadTwo2048FileData = Console.ReadLine();
             FileValidation(roadTwo2048FileData);
-            string[] roadTwo2048String = System.IO.File.ReadAllLines(roadTwo2048FileData);
-            int[] roadTwo2048 = Array.ConvertAll(roadTwo2048String, int.Parse);
-
+            int[] roadTwo2048 = FileLoader(roadTwo2048FileData);
+            
             Console.Write("Please input the file path for Road_3_2048.txt: ");
             string roadThree2048FileData = Console.ReadLine();
             FileValidation(roadThree2048FileData);
-            string[] roadThree2048String = System.IO.File.ReadAllLines(roadThree2048FileData);
-            int[] roadThree2048 = Array.ConvertAll(roadThree2048String, int.Parse);
-
+            int[] roadThree2048 = FileLoader(roadThree2048FileData);
+            
             // Ask the user which data set they would like to use
-            DataMenu(roadOne, roadTwo, roadThree, roadOne2048, roadTwo2048, roadThree2048);           
+            DataMenu(roadOne, roadTwo, roadThree, roadOne2048, roadTwo2048, roadThree2048);
+        }
+
+        static int[] FileLoader(string text)
+        {
+            string[] stringFile = File.ReadAllLines(text);
+            int[] intFile = Array.ConvertAll(stringFile, int.Parse);
+            return intFile;
         }
 
         private static void AscendingSort(int[] arr)
@@ -154,7 +185,7 @@ namespace Search_and_Sort
                 string tenthValueResponse = Console.ReadLine();
 
                 // The Ascending system is reused here
-                if (tenthValueResponse == "Ascending")
+                if (tenthValueResponse == "1")
                 {
                     int z;
                     for (int p = 0; p <= arr.Length - 2; p++)
@@ -178,7 +209,7 @@ namespace Search_and_Sort
                     }
                 }
                 // The Descending system has been reused here
-                else if (tenthValueResponse == "Descending")
+                else if (tenthValueResponse == "2")
                 {
                     int z;
                     for (int p = 0; p <= arr.Length - 2; p++)
@@ -201,7 +232,7 @@ namespace Search_and_Sort
                         Console.WriteLine(arr[i]);
                     }
                 }
-                else if (tenthValueResponse == "No sort")
+                else if (tenthValueResponse == "3")
                 {
                     // Print each tenth iteration until the max value has been reached
                     Console.WriteLine();
@@ -227,7 +258,7 @@ namespace Search_and_Sort
                 string fiftiethValueResponse = Console.ReadLine();
 
                 // The Ascending system is reused here
-                if (fiftiethValueResponse == "Ascending")
+                if (fiftiethValueResponse == "1")
                 {
                     int z;
                     for (int p = 0; p <= arr.Length - 2; p++)
@@ -251,7 +282,7 @@ namespace Search_and_Sort
                     }
                 }
                 // The Descending system has been reused here
-                else if (fiftiethValueResponse == "Descending")
+                else if (fiftiethValueResponse == "2")
                 {
                     int z;
                     for (int p = 0; p <= arr.Length - 2; p++)
@@ -274,7 +305,7 @@ namespace Search_and_Sort
                         Console.WriteLine(arr[i]);
                     }
                 }
-                else if (fiftiethValueResponse == "No sort")
+                else if (fiftiethValueResponse == "3")
                 {
                     // Print each fiftieth iteration until the max value has been reached
                     Console.WriteLine();
@@ -380,31 +411,31 @@ namespace Search_and_Sort
             Console.WriteLine();
             Console.WriteLine("Which data set would you like to use:\n1) Road One\n2) Road Two\n3) Road Three\n4) Road One - 2048\n5) Road Two - 2048\n6) Road Three - 2048\n7) View Special Merges\nResponse: ");
             string dataResponse = Console.ReadLine();           
-            if (dataResponse == "Road One")
+            if (dataResponse == "1")
             {
                 ProcessMenu(roadOne);
             }
-            else if (dataResponse == "Road Two")
+            else if (dataResponse == "2")
             {
                 ProcessMenu(roadTwo);
             }
-            else if (dataResponse == "Road Three")
+            else if (dataResponse == "3")
             {
                 ProcessMenu(roadThree);
             }
-            else if (dataResponse == "Road One - 2048")
+            else if (dataResponse == "4")
             {
                 ProcessMenu(roadOne2048);
             }
-            else if (dataResponse == "Road Two - 2048")
+            else if (dataResponse == "5")
             {
                 ProcessMenu(roadTwo2048);
             }
-            else if (dataResponse == "Road Three - 2048")
+            else if (dataResponse == "6")
             {
                 ProcessMenu(roadThree2048);
             }
-            else if (dataResponse == "View Special Merges")
+            else if (dataResponse == "7")
             {
                 SpecialMerge(roadOne, roadThree, roadOne2048, roadThree2048);
             }
@@ -421,22 +452,22 @@ namespace Search_and_Sort
             Console.WriteLine();
             Console.WriteLine("Which process would you like to use:\n1) Ascending Sort\n2) Descending Sort\n3) Display Iterative Values\n4) Value Search\nResponse: ");
             string processResponse = Console.ReadLine();
-            if (processResponse == "Ascending Sort")
+            if (processResponse == "1")
             {
                 AscendingSort(arr);
                 RestartSystem();
             }
-            else if (processResponse == "Descending Sort")
+            else if (processResponse == "2")
             {
                 DescendingSort(arr);
                 RestartSystem();
             }
-            else if (processResponse == "Display Iterative Values")
+            else if (processResponse == "3")
             {
                 DisplayIterativeValues(arr);
                 RestartSystem();
             }
-            else if (processResponse == "Value Search")
+            else if (processResponse == "4")
             {
                 int closestValue = UserSearch(arr);
                 int valuePosition = Array.IndexOf(arr, closestValue) + 1;
@@ -451,6 +482,7 @@ namespace Search_and_Sort
 
         private static void FileValidation(string data)
         {
+            // Create a system to validate the manual input files
             if (File.Exists(data))
             {
                 Console.WriteLine("Valid file");
@@ -459,7 +491,7 @@ namespace Search_and_Sort
             else
             {
                 Console.WriteLine("This file path was invalid. Resetting system.");
-                Main();
+                ManualFileInput();
             }
         }
 
@@ -467,15 +499,15 @@ namespace Search_and_Sort
         {
             Console.WriteLine();
             Console.WriteLine("Do you wish to use the system again (Yes/No)");
-            string restartResponse = Console.ReadLine();
-            if (restartResponse == "Yes")
+            string restartResponse = Console.ReadLine().ToLower();
+            if (restartResponse == "yes")
             {
                 Console.WriteLine();
                 Console.WriteLine("Restarting system.");
                 Console.WriteLine();
                 Main();
             }
-            else if (restartResponse == "No")
+            else if (restartResponse == "no")
             {
                 Console.WriteLine();
                 Console.WriteLine("Thank you for using the Search and Sort Program.");
