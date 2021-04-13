@@ -325,7 +325,7 @@ namespace Search_and_Sort
             }
         }
 
-        private static int UserSearch(int[] arr)
+        private static int BinarySearch(int[] arr)
         {
             // Declare a temporary array, used only in the search 
             int[] tempArr = new int[arr.Length];
@@ -397,6 +397,41 @@ namespace Search_and_Sort
             }            
         }
 
+        private static int SequentialSearch(int[] arr)
+        {
+            // Declare a temporary array, used only in the search 
+            int[] tempArr = new int[arr.Length];
+            Array.Copy(arr, 0, tempArr, 0, arr.Length);
+            // Reuse the system to arrange the values in ascending order
+            int z;
+            for (int p = 0; p <= tempArr.Length - 2; p++)
+            {
+                for (int v = 0; v <= tempArr.Length - 2; v++)
+                {
+                    if (tempArr[v] > tempArr[v + 1])
+                    {
+                        z = tempArr[v + 1];
+                        tempArr[v + 1] = tempArr[v];
+                        tempArr[v] = z;
+                    }
+                }
+            }
+            
+            Console.WriteLine();
+            Console.WriteLine("What number would you like to search for: ");
+            string searchTargetRaw = Console.ReadLine();
+            int searchTarget = Int32.Parse(searchTargetRaw);
+            // Loop through each value looking for the number
+            for (int i = 0; i < tempArr.Length; i++)
+            {
+                if (tempArr[i] == searchTarget)
+                {
+                    return searchTarget;
+                }                
+            }
+            return -1;
+        }
+
         private static int GetClosestValue(int valueOne, int valueTwo, int searchTarget)
         {
             // Determine between two values which is closest to the given number
@@ -450,7 +485,7 @@ namespace Search_and_Sort
         private static void ProcessMenu(int[] arr)
         {
             Console.WriteLine();
-            Console.WriteLine("Which process would you like to use:\n1) Ascending Sort\n2) Descending Sort\n3) Display Iterative Values\n4) Value Search\nResponse: ");
+            Console.WriteLine("Which process would you like to use:\n1) Ascending Sort\n2) Descending Sort\n3) Display Iterative Values\n4) Binary Search\n5) Sequential Search\nResponse: ");
             string processResponse = Console.ReadLine();
             if (processResponse == "1")
             {
@@ -469,7 +504,14 @@ namespace Search_and_Sort
             }
             else if (processResponse == "4")
             {
-                int closestValue = UserSearch(arr);
+                int closestValue = BinarySearch(arr);
+                int valuePosition = Array.IndexOf(arr, closestValue) + 1;
+                Console.WriteLine($"The closest value to your search is {closestValue}, found at position {valuePosition}");
+                RestartSystem();
+            }
+            else if (processResponse == "5")
+            {
+                int closestValue = SequentialSearch(arr);
                 int valuePosition = Array.IndexOf(arr, closestValue) + 1;
                 Console.WriteLine($"The closest value to your search is {closestValue}, found at position {valuePosition}");
                 RestartSystem();
@@ -503,8 +545,7 @@ namespace Search_and_Sort
             if (restartResponse == "yes")
             {
                 Console.WriteLine();
-                Console.WriteLine("Restarting system.");
-                Console.WriteLine();
+                Console.Write("Restarting system");
                 Main();
             }
             else if (restartResponse == "no")
