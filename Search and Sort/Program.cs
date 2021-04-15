@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Search_and_Sort
 {
@@ -505,14 +506,14 @@ namespace Search_and_Sort
             else if (processResponse == "4")
             {
                 int closestValue = BinarySearch(arr);
-                int valuePosition = Array.IndexOf(arr, closestValue) + 1;
+                int valuePosition = IndexFinder(closestValue, arr) + 1;
                 Console.WriteLine($"The closest value to your search is {closestValue}, found at position {valuePosition}");
                 RestartSystem();
             }
             else if (processResponse == "5")
             {
                 int closestValue = SequentialSearch(arr);
-                int valuePosition = Array.IndexOf(arr, closestValue) + 1;
+                int valuePosition = IndexFinder(closestValue, arr) + 1;
                 Console.WriteLine($"The closest value to your search is {closestValue}, found at position {valuePosition}");
                 RestartSystem();
             }
@@ -560,6 +561,20 @@ namespace Search_and_Sort
                 Console.WriteLine();
                 RestartSystem();
             }
+        }
+
+        public static int IndexFinder(int digits, int[] arr)
+        {
+            int index;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == digits)
+                {
+                    index = i;
+                    return index;
+                }
+            }
+            return 0;
         }
 
         private static void SpecialMerge(int[] roadOne256, int[] roadThree256, int[] roadOne2048, int[] roadThree2048)
