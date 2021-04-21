@@ -444,6 +444,7 @@ namespace Search_and_Sort
 
         private static void DataMenu(int[] roadOne, int[] roadTwo, int[] roadThree, int[] roadOne2048, int[] roadTwo2048, int[] roadThree2048)
         {
+            // Create a menu for the user to choose which data set they would like to use
             Console.WriteLine();
             Console.WriteLine("Which data set would you like to use:\n1) Road One\n2) Road Two\n3) Road Three\n4) Road One - 2048\n5) Road Two - 2048\n6) Road Three - 2048\n7) View Special Merges\nResponse: ");
             string dataResponse = Console.ReadLine();           
@@ -485,6 +486,7 @@ namespace Search_and_Sort
 
         private static void ProcessMenu(int[] arr)
         {
+            // Create a menu for the user to choose how they would like to manipulate the chosen data
             Console.WriteLine();
             Console.WriteLine("Which process would you like to use:\n1) Ascending Sort\n2) Descending Sort\n3) Display Iterative Values\n4) Binary Search\n5) Sequential Search\nResponse: ");
             string processResponse = Console.ReadLine();
@@ -540,6 +542,7 @@ namespace Search_and_Sort
 
         private static void RestartSystem()
         {
+            // Ask the user if they want to restart the program
             Console.WriteLine();
             Console.WriteLine("Do you wish to use the system again (Yes/No)");
             string restartResponse = Console.ReadLine().ToLower();
@@ -565,6 +568,7 @@ namespace Search_and_Sort
 
         public static int IndexFinder(int digits, int[] arr)
         {
+            // Iterate through each index value to find the one that matches that of the search target
             int index;
             for (int i = 0; i < arr.Length; i++)
             {
@@ -588,6 +592,7 @@ namespace Search_and_Sort
             Array.Copy(roadOne2048, 0, merge2048, 0, roadOne2048.Length);
             Array.Copy(roadThree2048, 0, merge2048, 2048, roadThree2048.Length);
 
+            // Carry out the specified instructions using the merged data files
             Console.WriteLine("We shall begin with the merges of Road_1_256.txt and Road_3_256.txt.");
             Console.WriteLine();
             Console.WriteLine("Here is the ascending sort:");
