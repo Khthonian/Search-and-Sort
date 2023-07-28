@@ -8,7 +8,7 @@ To run the program, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Make sure you have the latest version of the .NET SDK installed on your system.
-3. Open the project in your favorite C# development environment (e.g., Visual Studio, Visual Studio Code).
+3. Open the project in your favourite C# development environment (e.g., Visual Studio, Visual Studio Code).
 4. Build and run the application.
 
 Upon running the program, you will be greeted with a welcome message and prompted to choose between using the pre-installed data or providing your own files.
@@ -34,7 +34,7 @@ The program offers the following functionalities:
 
 ## Data Set Selection
 
-The program provides six data sets to choose from, categorized into two lengths:
+The program provides six data sets to choose from, categorised into two lengths:
 
 1. **256-length data sets**:
    - Road One (Road_1_256.txt)
